@@ -106,6 +106,14 @@ sally:mail/data:sallypass
 susan:/var/mail/susan:!@#$%^:*
 ```
 
+By default, the password field should be a hash.
+It can be found by using the passlib library.
+
+```python
+import passlib.context
+print(passlib.context.CryptContext(schemes=["sha512_crypt"]).hash("Tr0ub4dor&3"))
+```
+
 The colon-delimited fields are the user ID, the mailbox path, and the password.
 The mailbox path may be empty, relative, or absolute. An empty mailbox path
 will use the user ID as a relative path.
@@ -181,6 +189,7 @@ $ pip install 'pymap[admin,macaroon]'
 
 The admin service can create, update, and delete users, deliver new messages,
 check credentials, and provide health checks.
+(It is currently incompatible with the Maildir plugin.)
 
 The [pymap-admin][10] CLI tool simplifies interacting with the admin service.
 It can also be installed standalone to interact with remote pymap servers:
